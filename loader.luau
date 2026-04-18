@@ -8,9 +8,10 @@ local http = game:GetService("HttpService")
 -- Ottieni HWID
 local hwid = ""
 if syn and syn.request then
-    hwid = tostring(pcall(function()
-        return syn.request({Url="http://httpbin.org/get",Method="GET"}).Body
-    end))
+    local ok, res = pcall(function()
+        return syn.request({Url="http://httpbin.org/get", Method="GET"}).Body
+    end)
+    if ok then hwid = tostring(res) end
 end
 if hwid == "" then
     hwid = tostring(game:GetService("RbxAnalyticsService"):GetClientId())
@@ -56,5 +57,5 @@ if first_time_key ~= nil then
 end
 
 -- HWID ok, carica script reale
-print("[ Vortex Panel ] Authenticated successfully!")
+print("[ Vortex Panel ] Authenticated! Loading Vortex Hub...")
 loadstring(game:HttpGet(REAL_SCRIPT_URL))()
