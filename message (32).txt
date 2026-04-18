@@ -3426,4 +3426,3 @@ print("========================================")
 print("VORTEX DUELS - COMPLETELY LOADED!")
 print("Press U to toggle GUI")
 print("========================================")
-end
