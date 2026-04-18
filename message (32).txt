@@ -1,31 +1,3 @@
-return function(script_key)
-    local HttpService = game:GetService("HttpService")
-
-    local success, result = pcall(function()
-        return HttpService:GetAsync("https://raw.githubusercontent.com/gelotto811-del/VortexAPI/refs/heads/main/keys.json", true)
-    end)
-
-    if not success then
-        error("[ Vortex Panel ] ❌ Errore connessione!")
-        return
-    end
-
-    local keys_data = HttpService:JSONDecode(result)
-
-    if not keys_data[script_key] then
-        error("[ Vortex Panel ] ❌ Key non valida!")
-        return
-    end
-
-    local hwid = tostring(game:GetService("RbxAnalyticsService"):GetClientId())
-    local saved_hwid = keys_data[script_key]["hwid"]
-
-    if saved_hwid ~= "" and saved_hwid ~= hwid then
-        error("[ Vortex Panel ] ❌ HWID MISMATCH!")
-        return
-    end
-
-    print("[ Vortex Panel ] ✅ Autenticato!")
 repeat task.wait() until game:IsLoaded()
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
